@@ -1,6 +1,9 @@
+import { BsCart2 } from "react-icons/bs";
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
     return (
-        <div className="navbar bg-gray-800 text-white">
+        <div className="navbar bg-gray-800 text-white md:px-[50px]">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -27,7 +30,7 @@ const Navbar = () => {
                             <a>Home</a>
                         </li>
                         <li>
-                            <a>Products</a>
+                            <Link to="/products">Products</Link>
                         </li>
                     </ul>
                 </div>
@@ -39,12 +42,15 @@ const Navbar = () => {
                         <a>Home</a>
                     </li>
                     <li>
-                        <a>Products</a>
+                        <Link to="/products">Products</Link>
                     </li>
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <div className="bg-blue-300  rounded-lg p-3 flex items-center gap-2">
+                    <BsCart2 />
+                    {0}
+                </div>
             </div>
         </div>
     );
