@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import Cart from "../Cart/Cart";
 import Products from "../Prodcuts/Products";
 import MainLayout from "../layout/MainLayout";
 
@@ -9,11 +10,11 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <p>Home page</p>,
+                element: <Products />,
             },
             {
-                path: "/products",
-                element: <Products />,
+                path: "/cart",
+                element: <Cart />,
             },
         ],
     },

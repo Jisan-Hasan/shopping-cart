@@ -8,8 +8,16 @@ export const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
-        addToCart: (state, payload) => {
-            state.cart.push(payload);
+        addToCart: (state, action) => {
+            const newCartItem = action.payload;
+            const isAlreadyExist = state.cart.findIndex(
+                (item) => item.id === newCartItem.id
+            );
+            if (isAlreadyExist !== -1) {
+                state.cart[isAlreadyExist].quantity += 1;
+            } else {
+                state.cart.push({ ...newCartItem, quantity: 1 });
+            }
         },
     },
 });

@@ -1,7 +1,16 @@
 import { BsCart2 } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+    const { cart } = useSelector((state) => state.cart);
+    let totalCartItem = 0;
+
+    if (cart) {
+        totalCartItem = cart.reduce((total, item) => total + item.quantity, 0);
+    }
+
+    console.log(totalCartItem);
     return (
         <div className="navbar bg-gray-800 text-white md:px-[50px]">
             <div className="navbar-start">
@@ -22,35 +31,20 @@ const Navbar = () => {
                             />
                         </svg>
                     </label>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-                    >
-                        <li>
-                            <a>Home</a>
-                        </li>
-                        <li>
-                            <Link to="/products">Products</Link>
-                        </li>
-                    </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">Shopping</a>
+                <Link to="/" className="btn btn-ghost normal-case text-xl">
+                    Shopping
+                </Link>
             </div>
-            <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
-                    <li>
-                        <a>Home</a>
-                    </li>
-                    <li>
-                        <Link to="/products">Products</Link>
-                    </li>
-                </ul>
-            </div>
+
             <div className="navbar-end">
-                <div className="bg-blue-300  rounded-lg p-3 flex items-center gap-2">
+                <Link
+                    to="/cart"
+                    className="bg-blue-300  rounded-lg p-3 flex items-center gap-2 text-black font-semibold"
+                >
                     <BsCart2 />
-                    {0}
-                </div>
+                    {totalCartItem}
+                </Link>
             </div>
         </div>
     );
