@@ -1,10 +1,15 @@
 import React from "react";
-import { FaMinus, FaPlus,FaTrash } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
+import {
+    addOneToCart,
+    deleteFromCart,
+    removeOneFromCart,
+} from "../app/features/cart/cartSlice";
 
 const CartCard = ({ product }) => {
     const dispatch = useDispatch();
-    let availableQuantity = false;
+    let availableQuantity = true;
 
     return (
         <div className="cartCard">
@@ -29,7 +34,7 @@ const CartCard = ({ product }) => {
                 <div className="flex items-center space-x-4">
                     <button
                         className="lws-incrementQuantity"
-                        // onClick={() => handleIncrease(product.id)}
+                        onClick={() => dispatch(removeOneFromCart(product.id))}
                         disabled={!availableQuantity}
                     >
                         <FaMinus />
@@ -37,8 +42,7 @@ const CartCard = ({ product }) => {
                     <span className="lws-cartQuantity">{product.quantity}</span>
                     <button
                         className="lws-decrementQuantity"
-                        // onClick={() => handleDecrease(product.id)}
-                        disabled={product.quantity === 1}
+                        onClick={() => dispatch(addOneToCart(product.id))}
                     >
                         <FaPlus />
                     </button>
@@ -55,9 +59,9 @@ const CartCard = ({ product }) => {
             <div className="flex items-center justify-center col-span-2 mt-4 md:justify-end md:mt-0">
                 <button
                     className="lws-removeFromCart"
-                    // onClick={() => handleDelete(product.id)}
+                    onClick={() => dispatch(deleteFromCart(product.id))}
                 >
-                    <FaTrash/>
+                    <FaTrash />
                 </button>
             </div>
         </div>
