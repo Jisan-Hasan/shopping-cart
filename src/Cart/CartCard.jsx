@@ -9,7 +9,6 @@ import {
 
 const CartCard = ({ product }) => {
     const dispatch = useDispatch();
-    let availableQuantity = true;
 
     return (
         <div className="cartCard">
@@ -25,7 +24,7 @@ const CartCard = ({ product }) => {
                     <h4 className="lws-cartName">{product.name}</h4>
                     <p>
                         BDT{" "}
-                        <span className="lws-cartPrice">{product.price}</span>
+                        <span className="lws-cartPrice">{(product.price).toFixed(2)}</span>
                     </p>
                 </div>
             </div>
@@ -35,7 +34,7 @@ const CartCard = ({ product }) => {
                     <button
                         className="lws-incrementQuantity"
                         onClick={() => dispatch(removeOneFromCart(product.id))}
-                        disabled={!availableQuantity}
+                        disabled={product.quantity === 1}
                     >
                         <FaMinus />
                     </button>
@@ -51,7 +50,7 @@ const CartCard = ({ product }) => {
                 <p className="text-lg font-bold">
                     BDT{" "}
                     <span className="lws-calculatedPrice">
-                        {product.price * product.quantity}
+                        {(product.price * product.quantity).toFixed(2)}
                     </span>
                 </p>
             </div>
